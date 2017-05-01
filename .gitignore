@@ -70,3 +70,6 @@ target/
 
 # virtualenv
 python/
+
+# Vim
+*.swp

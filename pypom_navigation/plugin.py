@@ -89,7 +89,7 @@ def base_url(skin, variables):
 def credentials_mapping(skin, variables):
     """
         This fixture provides users credentials via a file specified on the
-        --variables option.The file format is one supported by
+        --variables option. The file format is one supported by
         pytest-variables.
 
         :return: credentials mapping dictionary with all available credentials

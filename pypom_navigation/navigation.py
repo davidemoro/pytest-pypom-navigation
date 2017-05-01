@@ -19,13 +19,13 @@ class Navigation(object):
                  page_mappings,
                  credentials_mapping,
                  skin,
-                 base_url):
+                 skin_base_url):
         self.setPage(page)
         self.default_page_class = default_page_class
         self.page_mappings = page_mappings
         self.credentials_mapping = credentials_mapping
         self.skin = skin
-        self.base_url = base_url
+        self.skin_base_url = skin_base_url
 
     def setPage(self, page, page_id=None):
         """ Set wrapping page and update reference links
@@ -41,7 +41,7 @@ class Navigation(object):
         """
         page_class = self.get_page_class(page_id=page_id)
         page_instance = page_class(self.page.driver, **kwargs)
-        page_url = urljoin(self.base_url, self.get_page_url(page_id))
+        page_url = urljoin(self.skin_base_url, self.get_page_url(page_id))
 
         page_instance.driver.visit(page_url)
         self.setPage(page_instance, page_id=page_id)

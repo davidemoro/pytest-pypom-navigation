@@ -79,10 +79,10 @@ def page_mappings():
 
 
 @pytest.fixture(scope='session')
-def base_url(skin, variables):
-    """ Returns the base_url associated to the skin.
+def skin_base_url(skin, variables):
+    """ Returns the skin_base_url associated to the skin.
     """
-    return variables['skins'][skin]['base_url']
+    return variables['skins'][skin]['skin_base_url']
 
 
 @pytest.fixture(scope='session')
@@ -115,10 +115,10 @@ def default_page_class(skin, page_mappings, default_pages):
 
 
 @pytest.fixture
-def base_page(base_url, browser, default_page_class, page_mappings, skin):
+def base_page(skin_base_url, browser, default_page_class, page_mappings, skin):
     """ Base page instance """
     page = page_factory(
-        base_url,
+        skin_base_url,
         browser,
         default_page_class,
         page_mappings,
@@ -151,7 +151,7 @@ def navigation(navigation_class,
                page_mappings,
                credentials_mapping,
                skin,
-               base_url):
+               skin_base_url):
     """ Wraps a page and a page mappings accessible by
         pages.
 
@@ -165,7 +165,7 @@ def navigation(navigation_class,
         page_mappings,
         credentials_mapping,
         skin,
-        base_url)
+        skin_base_url)
     return nav
 
 

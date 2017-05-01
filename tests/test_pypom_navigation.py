@@ -77,3 +77,15 @@ def test_default_pages(default_pages, skin):
 def test_page_mappings(page_mappings):
     """ Empty page mappings by default """
     assert len(page_mappings.keys()) == 0
+
+
+def test_default_page_class(default_page_class):
+    """ Default page class """
+    from pypom_navigation.pages import BasePage
+    assert default_page_class is BasePage
+
+
+def test_navigation_class(navigation_class):
+    """ Default navigation class """
+    from pypom_navigation.navigation import Navigation
+    assert navigation_class is Navigation

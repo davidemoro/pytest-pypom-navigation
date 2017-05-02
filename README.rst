@@ -2,13 +2,10 @@
 pytest-pypom-navigation
 =======================
 
+
 .. image:: https://travis-ci.org/tierratelematics/pytest-pypom-navigation.svg?branch=master
     :target: https://travis-ci.org/tierratelematics/pytest-pypom-navigation
     :alt: See Build Status on Travis CI
-
-.. image:: https://ci.appveyor.com/api/projects/status/github/tierratelematics/pytest-pypom-navigation?branch=master
-    :target: https://ci.appveyor.com/project/tierratelematics/pytest-pypom-navigation/branch/master
-    :alt: See Build Status on AppVeyor
 
 Core engine for tierra_qa package
 

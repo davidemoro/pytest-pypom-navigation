@@ -31,7 +31,7 @@ setup(
     install_requires=[
         'pytest>=3.0.7',
         'pypom_form',
-        'pytest-variables',
+        'pytest-variables[yaml]',
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

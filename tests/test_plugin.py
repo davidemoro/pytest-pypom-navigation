@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import pytest
+
 
 def test_bar_fixture(testdir):
     """Make sure that pytest accepts our fixture."""
@@ -89,3 +91,36 @@ def test_navigation_class(navigation_class):
     """ Default navigation class """
     from pypom_navigation.navigation import Navigation
     assert navigation_class is Navigation
+
+
+@pytest.mark.parametrize('credentials_file', ['credentials.json',
+                                              'credentials.yml'])
+def test_credentials_mapping(testdir, credentials_file):
+    """ Credentials available """
+    import os
+
+    # create a temporary pytest test module
+    testdir.makepyfile("""
+        def test_generated_credentials(credentials_mapping, skin, variables):
+            assert variables['skins'][skin]['credentials']\
+                ['Administrator']['username'] == "admin1"
+            assert variables['skins'][skin]['credentials']\
+                ['Administrator']['password'] == "asdf1"
+            assert credentials_mapping['Administrator']['username'] == "admin1"
+            assert credentials_mapping['Administrator']['password'] == "asdf1"
+    """)
+
+    # run pytest with the following cmd args
+    result = testdir.runpytest(
+        '--variables={0}'.format(os.path.join(os.path.dirname(__file__),
+                                              credentials_file)),
+        '-v'
+    )
+
+    # fnmatch_lines does an assertion internally
+    result.stdout.fnmatch_lines([
+        '*::test_generated_credentials PASSED',
+    ])
+
+    # make sure that that we get a '0' exit code for the testsuite
+    assert result.ret == 0

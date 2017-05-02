@@ -1,3 +1,5 @@
 [run]
 omit =
-  *test*py
+  tests/*
+  python/*
+  .tox/*

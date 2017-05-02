@@ -82,7 +82,7 @@ def page_mappings():
 def skin_base_url(skin, variables):
     """ Returns the skin_base_url associated to the skin.
     """
-    return variables['skins'][skin]['skin_base_url']
+    return variables['skins'][skin]['base_url']
 
 
 @pytest.fixture(scope='session')

@@ -14,6 +14,17 @@ def read(fname):
     return codecs.open(file_path, encoding='utf-8').read()
 
 
+install_requires = [
+    'pytest>=3.0.7',
+    'pypom_form',
+    'pytest-variables[yaml]'
+]
+
+tests_require = [
+    'tox',
+    'pytest-cov',
+]
+
 setup(
     name='pytest-pypom-navigation',
     version='0.0.1',
@@ -28,11 +39,7 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
-    install_requires=[
-        'pytest>=3.0.7',
-        'pypom_form',
-        'pytest-variables[yaml]',
-    ],
+    install_requires=install_requires,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Framework :: Pytest',
@@ -54,5 +61,8 @@ setup(
         'pytest11': [
             'pypom-navigation = pypom_navigation.plugin',
         ],
+    },
+    extras_require={
+        'tests': tests_require,
     },
 )

@@ -150,3 +150,27 @@ def test_get_page_class6():
         page_mappings,
         page_id=page_id,
         fallback=pypom_navigation.pages) == pypom_navigation
+
+
+def test_get_page_url_fallback():
+    """ Test get page url fallback """
+    from pypom_navigation.util import get_page_url
+
+    assert get_page_url('skin1', {}, None) == '/'
+
+
+def test_get_page_url_page_id():
+    """ Test get page url page id """
+    from pypom_navigation.util import get_page_url
+
+    assert get_page_url('skin1', {'HelloPage': {}}, 'HelloPage') == '/'
+
+
+def test_get_page_url_page_id_path():
+    """ Test get page url page id path """
+    from pypom_navigation.util import get_page_url
+
+    assert get_page_url(
+        'skin1',
+        {'HelloPage': {'path': '/hello'}},
+        'HelloPage') == '/hello'

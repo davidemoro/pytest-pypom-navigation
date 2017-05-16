@@ -124,3 +124,33 @@ def test_credentials_mapping(testdir, credentials_file):
 
     # make sure that that we get a '0' exit code for the testsuite
     assert result.ret == 0
+
+
+@pytest.mark.parametrize('credentials_file', ['credentials.json',
+                                              'credentials.yml'])
+def test_skin_base_url(testdir, credentials_file):
+    """ Skin base url """
+    import os
+
+    # create a temporary pytest test module
+    testdir.makepyfile("""
+        def test_generated_skin_base_url_dummy(skin_base_url, skin, variables):
+            assert variables['skins'][skin]\
+                ['base_url'] == 'https://skin1-coolsite.com'
+            assert skin_base_url == "https://skin1-coolsite.com"
+    """)
+
+    # run pytest with the following cmd args
+    result = testdir.runpytest(
+        '--variables={0}'.format(os.path.join(os.path.dirname(__file__),
+                                              credentials_file)),
+        '-v'
+    )
+
+    # fnmatch_lines does an assertion internally
+    result.stdout.fnmatch_lines([
+        '*::test_generated_skin_base_url_dummy PASSED',
+    ])
+
+    # make sure that that we get a '0' exit code for the testsuite
+    assert result.ret == 0

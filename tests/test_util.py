@@ -1,19 +1,5 @@
-import pytest
 import pypom_navigation
 import pypom_navigation.pages
-
-
-@pytest.mark.parametrize("dotted,mod", [
-    ('pypom_navigation.pages.BasePage', pypom_navigation.pages.BasePage,),
-    ('pypom_navigation.pages.base.BasePage', pypom_navigation.pages.BasePage,),
-    ('pypom_navigation', pypom_navigation,),
-])
-def test_dotted(dotted, mod):
-    """ """
-    from pypom_navigation.util import lookup_dotted_path
-
-    assert lookup_dotted_path(
-        dotted) == mod
 
 
 def test_get_page_class1():

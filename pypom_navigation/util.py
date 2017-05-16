@@ -3,6 +3,7 @@ try:
 except ImportError:
     # python3 compatibility
     from urllib.parse import urljoin
+from zope.dottedname.resolve import resolve
 
 
 def get_page_url(skin_name, page_mappings, page_id):
@@ -25,7 +26,7 @@ def get_page_class(skin_name, page_mappings, page_id=None, fallback=None,
         * a fallback if defined
         * the given fallback if defined or the global default page class
     """
-    fallback = fallback and fallback or lookup_dotted_path(default_pages[
+    fallback = fallback and fallback or resolve(default_pages[
         skin_name])
     if not page_id:
         return fallback
@@ -34,7 +35,7 @@ def get_page_class(skin_name, page_mappings, page_id=None, fallback=None,
     if page_class_mapping is not None:
         result = page_class_mapping.get(
             skin_name, page_class_mapping.get('fallback', None))
-        return result and lookup_dotted_path(result) or fallback
+        return result and resolve(result) or fallback
 
     return fallback
 
@@ -57,16 +58,3 @@ def page_factory(base_url, browser, default_page_class, page_mappings,
     page = page_class(browser, base_url=url, **kwargs)
 
     return page
-
-
-def lookup_dotted_path(dotted):
-    """ Lookup a class for a given dotted path.
-
-         This might help preventing circular import issues in configuration
-         files.
-    """
-    components = dotted.split('.')
-    mod = __import__(components[0])
-    for comp in components[1:]:
-        mod = getattr(mod, comp)
-    return mod

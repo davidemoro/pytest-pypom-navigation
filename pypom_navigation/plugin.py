@@ -28,7 +28,7 @@ def bar(request):
 
 
 @pytest.fixture(scope='session')
-def skin(request):
+def skin():
     """ This fixture provides the skin associated with the application
         on which starts the test session.
 

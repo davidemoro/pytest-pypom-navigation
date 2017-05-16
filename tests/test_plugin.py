@@ -154,3 +154,52 @@ def test_skin_base_url(testdir, credentials_file):
 
     # make sure that that we get a '0' exit code for the testsuite
     assert result.ret == 0
+
+
+@pytest.mark.parametrize('credentials_file', ['credentials.yml',
+                                              'credentials.json'])
+def test_skin_base_url_multiple(testdir, credentials_file):
+    """ Skin base url (multiple skins).
+        You can run your tests multiple times for each supported skin.
+
+        In this test we show how to override the default (single) skin
+        fixture with a new multiple one with skin1 and skin2.
+
+        skin1 and skin2 must be configured in credentials file.
+    """
+    import os
+
+    # create a temporary pytest test module
+    testdir.makepyfile("""
+        import pytest
+
+
+        @pytest.fixture(scope='session', params=['skin1', 'skin2'])
+        def skin(request):
+            return request.param
+
+
+        def test_generated_skin_base_url_multiple(skin_base_url, skin,
+                                                  variables):
+            if skin == 'skin1':
+                assert skin_base_url == 'https://skin1-coolsite.com'
+            elif skin == 'skin2':
+                assert skin_base_url == 'https://skin2-coolsite.com'
+            assert variables['skins'][skin]\
+                ['base_url'] == skin_base_url
+    """)
+
+    # run pytest with the following cmd args
+    result = testdir.runpytest(
+        '--variables={0}'.format(os.path.join(os.path.dirname(__file__),
+                                              credentials_file)),
+        '-v'
+    )
+
+    # fnmatch_lines does an assertion internally
+    result_text = result.stdout.str()
+    assert 'test_generated_skin_base_url_multiple[skin1] PASSED' in result_text
+    assert 'test_generated_skin_base_url_multiple[skin2] PASSED' in result_text
+
+    # make sure that that we get a '0' exit code for the testsuite
+    assert result.ret == 0

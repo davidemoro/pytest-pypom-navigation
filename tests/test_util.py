@@ -174,3 +174,64 @@ def test_get_page_url_page_id_path():
         'skin1',
         {'HelloPage': {'path': '/hello'}},
         'HelloPage') == '/hello'
+
+
+def test_page_factory_1():
+    """ Test page factory (page_id None) """
+    import mock
+    from pypom_navigation.util import page_factory
+
+    page_mock = mock.Mock()
+
+    page_id = None
+    skin_name = 'skin1'
+    base_url = 'http://baseurl.com'
+    browser = None
+    default_page_class = mock.Mock(return_value=page_mock)
+    page_mappings = None
+
+    result_page = page_factory(
+        base_url,
+        browser,
+        default_page_class,
+        page_mappings,
+        skin_name,
+        page_id=page_id)
+    assert result_page is page_mock
+    assert default_page_class.assert_called_once_with(
+        browser,
+        base_url=base_url
+        ) is None
+
+
+def test_page_factory():
+    """ Test page factory (page_id not None) """
+    import mock
+    from pypom_navigation.util import page_factory
+
+    page_mock = mock.Mock()
+
+    page_id = 'pageID'
+    skin_name = 'skin1'
+    base_url = 'http://baseurl.com'
+    browser = None
+    default_page_class = mock.Mock(return_value=page_mock)
+    page_mappings = {
+        page_id: {
+            'path': '/subpath',
+            'page_class': {
+                skin_name: 'mock.Mock'
+            }
+        }
+    }
+
+    result_page = page_factory(
+        base_url,
+        browser,
+        default_page_class,
+        page_mappings,
+        skin_name,
+        page_id=page_id)
+    assert result_page is not page_mock
+    assert not default_page_class.called
+    assert result_page.base_url == 'http://baseurl.com/subpath'

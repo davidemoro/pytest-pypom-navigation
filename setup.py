@@ -18,12 +18,12 @@ install_requires = [
     'pytest>=3.0.7',
     'pypom_form',
     'pytest-variables[yaml]',
-    'mock',
 ]
 
 tests_require = [
     'tox',
     'pytest-cov',
+    'mock',
 ]
 
 setup(

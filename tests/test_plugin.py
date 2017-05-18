@@ -203,3 +203,47 @@ def test_skin_base_url_multiple(testdir, credentials_file):
 
     # make sure that that we get a '0' exit code for the testsuite
     assert result.ret == 0
+
+
+@pytest.mark.parametrize('credentials_file', ['credentials.yml',
+                                              'credentials.json'])
+def test_skip_by_skin_names(testdir, credentials_file):
+    """ Skip by skin names
+    """
+    import os
+
+    # create a temporary pytest test module
+    testdir.makepyfile("""
+        import pytest
+
+
+        @pytest.fixture(scope='session', params=['skin1', 'skin2'])
+        def skin(request):
+            return request.param
+
+
+        @pytest.mark.skip_skins(['skin1'])
+        def test_generated_skip_skins(skin_base_url, skin,
+                                      variables):
+            if skin == 'skin1':
+                assert 0
+            elif skin == 'skin2':
+                assert skin_base_url == 'https://skin2-coolsite.com'
+            assert variables['skins'][skin]\
+                ['base_url'] == skin_base_url
+    """)
+
+    # run pytest with the following cmd args
+    result = testdir.runpytest(
+        '--variables={0}'.format(os.path.join(os.path.dirname(__file__),
+                                              credentials_file)),
+        '-v'
+    )
+
+    # fnmatch_lines does an assertion internally
+    result_text = result.stdout.str()
+    assert 'test_generated_skip_skins[skin1] SKIPPED' in result_text
+    assert 'test_generated_skip_skins[skin2] PASSED' in result_text
+
+    # make sure that that we get a '0' exit code for the testsuite
+    assert result.ret == 0

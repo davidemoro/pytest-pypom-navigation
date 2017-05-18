@@ -287,3 +287,36 @@ def test_page_instance():
 
     assert base_page.driver.driver.maximize_window \
         .assert_called_once_with() is None
+
+
+def test_navigation():
+    """ Test navigation  """
+    from mock import Mock
+    from pypom_navigation.plugin import navigation
+
+    navigation_instance = Mock()
+    navigation_class = Mock()
+    navigation_class.return_value = navigation_instance
+
+    page_instance = object()
+    default_page_class = object()
+    page_mappings = object()
+    credentials_mapping = object()
+    skin = object()
+    skin_base_url = object()
+
+    assert navigation(
+        navigation_class,
+        page_instance,
+        default_page_class,
+        page_mappings,
+        credentials_mapping,
+        skin,
+        skin_base_url
+    ) is navigation_instance
+    assert navigation_class.assert_called_once_with(
+        page_instance,
+        default_page_class,
+        page_mappings,
+        credentials_mapping,
+        skin, skin_base_url) is None

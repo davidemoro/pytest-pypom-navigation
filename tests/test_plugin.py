@@ -247,3 +247,29 @@ def test_skip_by_skin_names(testdir, credentials_file):
 
     # make sure that that we get a '0' exit code for the testsuite
     assert result.ret == 0
+
+
+def test_base_page():
+    from mock import patch
+    from mock import Mock
+    from pypom_navigation.plugin import base_page
+
+    page_mock = Mock()
+
+    with patch('pypom_navigation.plugin.page_factory') as page_factory:
+        page_factory.return_value = page_mock
+
+        skin_base_url = None
+        browser = None
+        default_page_class = None
+        page_mappings = None
+        skin = None
+        base_page(skin_base_url, browser,
+                  default_page_class, page_mappings, skin)
+        assert page_factory.assert_called_once_with(
+            skin_base_url,
+            browser,
+            default_page_class,
+            page_mappings,
+            skin) is None
+        assert page_mock.open.called is True

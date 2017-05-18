@@ -273,3 +273,17 @@ def test_base_page():
             page_mappings,
             skin) is None
         assert page_mock.open.called is True
+
+
+def test_page_instance():
+    """ page instance fixture customizes the base page (for example)
+        by default maximize windows has called but you can override it
+    """
+    from mock import MagicMock
+    from pypom_navigation.plugin import page_instance
+
+    base_page = MagicMock()
+    assert page_instance(base_page) is base_page
+
+    assert base_page.driver.driver.maximize_window \
+        .assert_called_once_with() is None

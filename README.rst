@@ -20,7 +20,11 @@ This `Pytest`_ plugin was generated with `Cookiecutter`_ along with `@hackebrot`
 Features
 --------
 
-* TODO
+``pytest-pypom-navigation`` is not intended to be used as a standalone package.
+
+It provides the core engine for the strong opinionated scaffolding solution called cookiecutter-qa.
+If you want to create a QA project based on Selenium/Splinter you can install cookiecutter-qa and
+generate a new ready to be used package with a working hello world.
 
 
 Requirements

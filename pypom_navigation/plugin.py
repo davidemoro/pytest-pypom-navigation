@@ -9,24 +9,6 @@ from .util import (
 from .navigation import Navigation
 
 
-def pytest_addoption(parser):
-    group = parser.getgroup('pypom-navigation')
-    group.addoption(
-        '--foo',
-        action='store',
-        dest='dest_foo',
-        default='2017',
-        help='Set the value for the fixture "bar".'
-    )
-
-    parser.addini('HELLO', 'Dummy pytest.ini setting')
-
-
-@pytest.fixture
-def bar(request):
-    return request.config.option.dest_foo
-
-
 @pytest.fixture(scope='session')
 def skin():
     """ This fixture provides the skin associated with the application

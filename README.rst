@@ -26,6 +26,8 @@ It provides the core engine for the strong opinionated scaffolding solution call
 If you want to create a QA project based on Selenium/Splinter you can install cookiecutter-qa and
 generate a new ready to be used package with a working hello world.
 
+Since the core engine of the QA scaffold has been decoupled it will be easier to keep updated
+previously generated projects.
 
 Requirements
 ------------

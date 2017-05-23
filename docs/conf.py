@@ -31,6 +31,9 @@
 # ones.
 extensions = [
     'sphinx.ext.ifconfig',
+    'sphinx.ext.graphviz',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

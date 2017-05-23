@@ -27,6 +27,11 @@ tests_require = [
     'mock',
 ]
 
+docs_require = [
+    'Sphinx',
+    'sphinx_rtd_theme',
+    ]
+
 setup(
     name='pytest-pypom-navigation',
     version='0.0.1',
@@ -66,5 +71,6 @@ setup(
     },
     extras_require={
         'tests': tests_require,
+        'docs': docs_require,
     },
 )

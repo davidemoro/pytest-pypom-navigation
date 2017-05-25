@@ -16,7 +16,7 @@ Fixtures
 Navigation and base page
 ========================
 
-.. automodule:: pypom_navigation.pages.BasePage
+.. automodule:: pypom_navigation.pages.base
    :members:
    :member-order: bysource
 

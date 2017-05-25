@@ -7,6 +7,9 @@ pytest-pypom-navigation
     :target: https://travis-ci.org/tierratelematics/pytest-pypom-navigation
     :alt: See Build Status on Travis CI
 
+.. image:: https://readthedocs.org/projects/pytest-pypom-navigation/badge/?version=latest
+          :target: http://pytest-pypom-navigation.readthedocs.io
+
 .. image:: https://codecov.io/gh/tierratelematics/pytest-pypom-navigation/branch/master/graph/badge.svg
           :target: https://codecov.io/gh/tierratelematics/pytest-pypom-navigation
 

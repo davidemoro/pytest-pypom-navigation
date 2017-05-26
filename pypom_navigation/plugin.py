@@ -3,6 +3,8 @@
 import pytest
 import uuid
 import datetime
+import json
+from string import Template
 
 from .util import (
     get_page_class,
@@ -205,3 +207,92 @@ def bdd_vars(test_run_identifier, skin, now):
     return {'test_run_identifier': test_run_identifier,
             'skin': skin,
             'datetime': now.isoformat()}
+
+
+@pytest.fixture
+def parametrizer_class(bdd_vars):
+    """ Provides a parametrizer class used for convert parametrized
+        json values to regular python dicts.
+    """
+    class Parametrizer(object):
+        """ This class let you parametrize raw_conf (json strings)
+            and convert them to regular Python dictionaries.
+
+            Matching name
+            -------------
+
+            >>> value = '{"baudrate": $baudrate_value}'
+            >>> mapping = {"baudrate_value": 250, "name": "a name"}
+            >>> parametrizer = Parametrizer(value, mapping=mapping)
+
+            With the ``parametrize`` method you'll get a parametrized
+            string:
+
+            >>> parametrizer.parametrize()
+            ... '{"baudrate": 250}'
+
+
+            With the ``json_loads`` method you'll get a parametrized regular
+            Python mapping:
+
+            >>> parametrizer.json_loads()
+            ... {"baudrate": 250}
+
+            Non matching names
+            ------------------
+
+            >>> value = '{"name": $a_name}'
+            >>> mapping = {"name": "a name"}
+            >>> parametrizer = Parametrizer(value, mapping=mapping)
+
+            With the ``parametrize`` method you'll get a parametrized
+            string:
+
+            >>> parametrizer.parametrize()
+            ... '{"name": "$a_name"}'
+
+
+            With the ``json_loads`` method you'll get a parametrized regular
+            Python mapping:
+
+            >>> parametrizer.json_loads()
+            ... {"name": "$a_name"}
+
+            Json not valid
+            --------------
+
+            >>> value = '{"name": $name}'
+            >>> mapping = {"name": "a name"}
+            >>> parametrizer = Parametrizer(value, mapping=mapping)
+
+            With the ``parametrize`` method you'll get a parametrized
+            string:
+
+            >>> parametrizer.parametrize()
+            ... '{"name": a name}'
+
+
+            With the ``json_loads`` method you'll get a parametrized regular
+            Python mapping:
+
+            >>> parametrizer.json_loads()
+            Traceback (most recent call last):
+                ...
+            ValueError: No JSON object could be decoded
+        """
+
+        def __init__(self, value, mapping=bdd_vars):
+            self.value = value
+            self.mapping = mapping
+
+        def parametrize(self):
+            """ Return the value with template substitution """
+            template = Template(self.value)
+            return template.safe_substitute(**self.mapping)
+
+        def json_loads(self):
+            """ Return the json load of template substitution """
+            parametrized = self.parametrize()
+            return json.loads(parametrized)
+
+    return Parametrizer

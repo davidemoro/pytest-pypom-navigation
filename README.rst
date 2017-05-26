@@ -32,24 +32,12 @@ generate a new ready to be used package with a working hello world.
 Since the core engine of the QA scaffold has been decoupled it will be easier to keep updated
 previously generated projects.
 
-Requirements
+Tests
 ------------
 
-* TODO
+You can run "pytest-pypom-navigation" tests via `tox`_::
 
-
-Installation
-------------
-
-You can install "pytest-pypom-navigation" via `pip`_ from `PyPI`_::
-
-    $ pip install pytest-pypom-navigation
-
-
-Usage
------
-
-* TODO
+    $ tox -epy36
 
 Contributing
 ------------

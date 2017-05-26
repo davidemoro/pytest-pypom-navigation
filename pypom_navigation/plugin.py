@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import pytest
+import uuid
+import datetime
 
 from .util import (
     get_page_class,
@@ -179,3 +181,27 @@ def skip_by_skin_names(request, skin):
     if request.node.get_marker('skip_skins'):
         if skin in request.node.get_marker('skip_skins').args[0]:
             pytest.skip('skipped on this skin: {}'.format(skin))
+
+
+@pytest.fixture
+def test_run_identifier(skin):
+    """ Return a session based random prefixed UUID used for
+        identifying data created in this test run.
+    """
+    return "QA-{0}-{1}".format(str(uuid.uuid1()), skin)
+
+
+@pytest.fixture
+def now():
+    """ Now fixture, returns current datetime object """
+    return datetime.datetime.now()
+
+
+@pytest.fixture
+def bdd_vars(test_run_identifier, skin, now):
+    """ BDD step vars for test parametrization for dynamic values
+        such as test_run_identifier or datetime
+    """
+    return {'test_run_identifier': test_run_identifier,
+            'skin': skin,
+            'datetime': now.isoformat()}

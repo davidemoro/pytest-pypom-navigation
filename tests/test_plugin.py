@@ -257,3 +257,21 @@ def test_navigation():
         page_mappings,
         credentials_mapping,
         skin, skin_base_url) is None
+
+
+def test_test_run_identifier(test_run_identifier, skin):
+    """ Test run identifier """
+    assert test_run_identifier.startswith('QA-')
+    assert test_run_identifier.endswith('-{0}'.format(skin))
+
+
+def test_now(now):
+    """ Test now """
+    assert now.isoformat()
+
+
+def test_bdd_vars(bdd_vars, skin, now, test_run_identifier):
+    """ Test bdd_vars """
+    assert bdd_vars['skin'] == skin
+    assert bdd_vars['datetime'] == now.isoformat()
+    assert bdd_vars['test_run_identifier'] == test_run_identifier

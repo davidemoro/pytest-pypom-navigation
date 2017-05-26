@@ -275,3 +275,16 @@ def test_bdd_vars(bdd_vars, skin, now, test_run_identifier):
     assert bdd_vars['skin'] == skin
     assert bdd_vars['datetime'] == now.isoformat()
     assert bdd_vars['test_run_identifier'] == test_run_identifier
+
+
+def test_parametrizer_class(parametrizer_class):
+    """ Test parametrizer class """
+    from pypom_navigation.parametrizer import Parametrizer
+    assert parametrizer_class is Parametrizer
+
+
+def test_parametrizer(parametrizer_class, parametrizer, test_run_identifier):
+    """ Test parametrizer """
+    assert isinstance(parametrizer, parametrizer_class)
+    assert parametrizer.parametrize(
+        '$test_run_identifier') == test_run_identifier

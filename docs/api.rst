@@ -31,3 +31,10 @@ Utils
 .. automodule:: pypom_navigation.util
    :members:
    :member-order: bysource
+
+Parametrizer
+============
+
+.. automodule:: pypom_navigation.parametrizer
+   :members:
+   :member-order: bysource

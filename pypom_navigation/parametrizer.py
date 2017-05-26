@@ -25,8 +25,8 @@ class Parametrizer(object):
         With the ``json_loads`` method you'll get a parametrized regular
         Python mapping:
 
-        >>> parametrizer.json_loads(value)
-        {'baudrate': 250}
+        >>> parametrizer.json_loads(value) == {'baudrate': 250}
+        True
 
         Non matching names
         ------------------
@@ -45,8 +45,8 @@ class Parametrizer(object):
         With the ``json_loads`` method you'll get a parametrized regular
         Python mapping:
 
-        >>> parametrizer.json_loads(value)
-        {'name': '$a_name'}
+        >>> parametrizer.json_loads(value) == {'name': '$a_name'}
+        True
 
         Json not valid
         --------------
@@ -62,13 +62,14 @@ class Parametrizer(object):
         '{"name": a name}'
 
 
-        With the ``json_loads`` method you'll get a parametrized regular
-        Python mapping:
+        Depending on Python version 2 vs 3 you will get a different exception:
 
-        >>> parametrizer.json_loads(value)
-        Traceback (most recent call last):
-            ...
-        json.decoder.JSONDecodeError: Expecting value: line 1 column 10 (char 9)
+        * json.decoder.JSONDecodeError: Expecting value: ...
+        * ValueError: No JSON object could be decoded
+
+        >>> import pytest
+        >>> with pytest.raises(Exception):
+        ...     parametrizer.json_loads(value)
     """
 
     def __init__(self, mapping):

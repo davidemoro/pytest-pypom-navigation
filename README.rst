@@ -25,12 +25,9 @@ Features
 
 ``pytest-pypom-navigation`` is not intended to be used as a standalone package.
 
-It provides the core engine for the strong opinionated scaffolding solution called cookiecutter-qa.
-If you want to create a QA project based on Selenium/Splinter you can install cookiecutter-qa and
-generate a new ready to be used package with a working hello world.
-
-Since the core engine of the QA scaffold has been decoupled it will be easier to keep updated
-previously generated projects.
+It provides the core engine (pytest fixtures) needed by the strong opinionated scaffolding solution
+called `cookiecutter-qa`_ that let you generate a fully working QA testing hello world project based on
+Selenium/Splinter with just one command.
 
 Tests
 ------------
@@ -67,3 +64,4 @@ If you encounter any problems, please `file an issue`_ along with a detailed des
 .. _`tox`: https://tox.readthedocs.io/en/latest/
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`PyPI`: https://pypi.python.org/pypi
+.. _`cookiecutter-qa`: https://github.com/tierratelematics/cookiecutter-qa

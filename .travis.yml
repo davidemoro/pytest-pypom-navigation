@@ -14,7 +14,9 @@ install:
 script: tox -e $TOX_ENV
 
 after_success:
+  - pip install codecov
   - ls -la
+  - codecov
   - bash <(curl -s https://codecov.io/bash) -e ${TOXENV}
 
 before_cache:

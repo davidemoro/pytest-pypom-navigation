@@ -9,15 +9,13 @@ python:
   - "pypy"
 
 install:
+  - pip install codecov
   - pip install tox
   - "TOX_ENV=${TRAVIS_PYTHON_VERSION/[0-9].[0-9]/py${TRAVIS_PYTHON_VERSION/.}}"
 script: tox -e $TOX_ENV
 
 after_success:
-  - pip install codecov
-  - ls -la
   - codecov
-  - bash <(curl -s https://codecov.io/bash) -e ${TOXENV}
 
 before_cache:
   - rm -rf $HOME/.cache/pip/log

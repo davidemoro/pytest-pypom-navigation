@@ -34,6 +34,7 @@ Tests
 
 You can run "pytest-pypom-navigation" tests via `tox`_::
 
+    $ pip install tox
     $ tox -epy36
 
 Contributing

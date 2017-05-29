@@ -14,12 +14,10 @@ install:
 script: tox -e $TOX_ENV
 
 after_success:
-- bash <(curl -s https://codecov.io/bash) -e ${TOXENV}
-
-before_cache:
-  - pwd
   - ls -la
   - bash <(curl -s https://codecov.io/bash) -e ${TOXENV}
+
+before_cache:
   - rm -rf $HOME/.cache/pip/log
 cache:
   directories:

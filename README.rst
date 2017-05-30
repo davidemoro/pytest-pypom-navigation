@@ -13,6 +13,10 @@ pytest-pypom-navigation
 .. image:: https://codecov.io/gh/tierratelematics/pytest-pypom-navigation/branch/master/graph/badge.svg
           :target: https://codecov.io/gh/tierratelematics/pytest-pypom-navigation
 
+.. image:: https://pyup.io/repos/github/tierratelematics/pytest-pypom-navigation/python-3-shield.svg
+          :target: https://pyup.io/repos/github/tierratelematics/pytest-pypom-navigation/
+          :alt: Python 3
+
 Core engine for tierra_qa package
 
 ----

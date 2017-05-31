@@ -1,4 +1,54 @@
 # -*- coding: utf-8 -*-
+"""
+The following diagram shows the interactions between the `pytest fixtures`_
+created in the ``pypom_navigation`` package:
+
+.. graphviz::
+
+   digraph {
+      base_page;
+      bdd_vars;
+      browser;
+      credentials_mapping;
+      default_page;
+      default_page_class;
+      default_pages;
+      navigation;
+      navigation_class;
+      now;
+      page_instance;
+      page_mappings,
+      parametrizer;
+      parametrizer_class;
+      request;
+      skin;
+      skin_base_url;
+      skip_by_skin_names;
+      test_run_identifier;
+      variables;
+      base_page -> {page_instance};
+      bdd_vars -> {parametrizer};
+      browser -> {base_page};
+      credentials_mapping -> {navigation};
+      default_page_class -> {base_page navigation};
+      default_pages -> {default_page_class};
+      navigation_class -> {navigation};
+      now -> {bdd_vars};
+      page_instance -> {navigation};
+      page_mappings -> {default_page_class base_page navigation};
+      parametrizer_class -> {parametrizer};
+      request -> {skip_by_skin_names};
+      skin -> {skin_base_url credentials_mapping default_page_class
+               base_page navigation skip_by_skin_names
+               test_run_identifier bdd_vars};
+      skin_base_url -> {base_page navigation};
+      test_run_identifier -> {bdd_vars};
+      variables -> {skin_base_url credentials_mapping};
+   }
+
+
+.. _pytest fixtures: http://doc.pytest.org/en/latest/fixture.html
+"""
 
 import pytest
 import uuid

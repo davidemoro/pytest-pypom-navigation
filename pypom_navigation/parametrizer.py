@@ -5,11 +5,12 @@ from string import Template
 
 
 class Parametrizer(object):
-    """ This class let you parametrize raw_conf (json strings)
+    """ This class let you parametrize your strings
         and convert them to regular Python dictionaries.
 
-        Matching name
-        -------------
+        It supports also json.
+
+        Let's try with a **matching name**
 
         >>> value = '{"baudrate": $baudrate_value}'
         >>> mapping = {"baudrate_value": 250, "name": "a name"}
@@ -28,8 +29,7 @@ class Parametrizer(object):
         >>> parametrizer.json_loads(value) == {'baudrate': 250}
         True
 
-        Non matching names
-        ------------------
+        And now with **non matching names**
 
         >>> value = '{"name": "$a_name"}'
         >>> mapping = {"name": "a name"}
@@ -48,8 +48,7 @@ class Parametrizer(object):
         >>> parametrizer.json_loads(value) == {'name': '$a_name'}
         True
 
-        Json not valid
-        --------------
+        And **json not valid**
 
         >>> value = '{"name": $name}'
         >>> mapping = {"name": "a name"}

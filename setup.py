@@ -35,8 +35,8 @@ docs_require = [
 setup(
     name='pytest-pypom-navigation',
     version='0.0.1',
-    author='Tierra QA team',
-    author_email='DLQA@tierratelematics.com',
+    author='Davide Moro',
+    author_email='davide.moro@gmail.com',
     maintainer='Tierra QA team',
     maintainer_email='DLQA@tierratelematics.com',
     license='Apache Software License 2.0',

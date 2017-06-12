@@ -66,7 +66,7 @@ setup(
     ],
     entry_points={
         'pytest11': [
-            'pypom-navigation = pypom_navigation.plugin',
+            'pypom_navigation = pypom_navigation.plugin',
         ],
     },
     extras_require={

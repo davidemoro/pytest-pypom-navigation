@@ -62,6 +62,14 @@ from .navigation import Navigation
 from .parametrizer import Parametrizer
 
 
+def pytest_configure(config):
+    # register an additional marker
+    config.addinivalue_line(
+        "markers",
+        "skip_skins(skins): mark test to be skipped for the given skin ids"
+    )
+
+
 def skip_skins(skins):
     """
     Decorator to mark tests to be skipped for the given skin ids.

@@ -42,7 +42,8 @@ setup(
     license='Apache Software License 2.0',
     url='https://github.com/tierratelematics/pytest-pypom-navigation',
     description='Core engine for tierra_qa package',
-    long_description=read('README.rst'),
+    long_description=open("README.rst").read() + "\n" +
+    open("CHANGES.rst").read(),
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,

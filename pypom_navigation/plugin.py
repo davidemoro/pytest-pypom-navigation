@@ -62,6 +62,16 @@ from .navigation import Navigation
 from .parametrizer import Parametrizer
 
 
+def skip_skins(skins):
+    """
+    Decorator to mark tests to be skipped for the given skin ids.
+
+    ie. @skip_skins(['skin1', 'skin2'])
+    :return pytest.mark:
+    """
+    return pytest.mark.skip_skins(skins)
+
+
 @pytest.fixture(scope='session')
 def skin():
     """ This fixture provides the skin associated with the application

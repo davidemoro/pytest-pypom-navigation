@@ -1,9 +1,10 @@
 Changelog
 *********
 
-0.0.2 (unreleased)
+0.1.0 (unreleased)
 ==================
 
+- Add update_page and action_performed methods on navigation.
 - Wait for pages to load when visiting them.
 
 

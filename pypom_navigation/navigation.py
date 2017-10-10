@@ -44,6 +44,7 @@ class Navigation(object):
         page_url = urljoin(self.skin_base_url, self.get_page_url(page_id))
 
         page_instance.driver.visit(page_url)
+        page_instance.wait_for_page_to_load()
         self.setPage(page_instance, page_id=page_id)
         return page_instance
 

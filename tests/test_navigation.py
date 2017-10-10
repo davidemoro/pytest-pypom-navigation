@@ -66,6 +66,7 @@ def test_visit_page(navigation, page_instance):
     assert navigation.page_id == 'HomePage'
     assert home_page.driver.visit.assert_called_once_with(
         'https://skin1-coolsite.com/home') is None
+    assert home_page.wait_for_page_to_load.assert_called_once() is None
 
 
 def test_get_credentials(navigation):

@@ -73,3 +73,6 @@ python/
 
 # Vim
 *.swp
+
+# PyCharm
+.idea/

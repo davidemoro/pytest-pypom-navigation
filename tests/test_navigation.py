@@ -73,7 +73,6 @@ def test_visit_page(navigation, page_instance, default_page_class):
     assert default_page_class.return_value.navigation is navigation
 
 
-
 def test_update_page(navigation, page_instance, default_page_class):
     """ Test update page """
     home_page = navigation.update_page('HomePage')

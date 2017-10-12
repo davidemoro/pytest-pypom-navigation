@@ -1,7 +1,7 @@
 Changelog
 *********
 
-0.1.0 (unreleased)
+0.1.0 (2017-10-12)
 ==================
 
 - Add update_page and action_performed methods on navigation.

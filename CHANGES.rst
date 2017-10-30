@@ -4,7 +4,7 @@ Changelog
 0.1.1 (unreleased)
 ==================
 
-- Nothing changed yet.
+- support fallback page classes in action_performed
 
 
 0.1.0 (2017-10-12)

@@ -1,9 +1,9 @@
 import pytest
+from mock import MagicMock
 
 
 @pytest.fixture
 def page_instance():
-    from mock import MagicMock
     return MagicMock()
 
 
@@ -37,7 +37,6 @@ def page_mappings():
 
 @pytest.fixture
 def default_page_class():
-    from mock import MagicMock
     return MagicMock()
 
 
@@ -92,6 +91,29 @@ def test_action_performed(navigation, page_instance, default_page_class):
     assert home_page.wait_for_page_to_load.assert_called_once() is None
     assert default_page_class.assert_called_once_with(page_instance.driver) is None
     assert default_page_class.return_value.navigation is navigation
+
+
+def test_action_performed_no_action_mapped(navigation, page_instance, default_page_class):
+    """ Test visit page """
+    navigation.setPage(page_instance, 'AnotherPage')
+    default_page = navigation.action_performed('unknown')
+    assert navigation.page is default_page
+    assert navigation.page_id is None
+    assert default_page.wait_for_page_to_load.assert_called_once() is None
+    assert default_page_class.assert_called_once_with(page_instance.driver) is None
+    assert default_page_class.return_value.navigation is navigation
+
+
+def test_action_performed_fallback(navigation, page_instance, default_page_class):
+    """ Test visit page """
+    navigation.setPage(page_instance, 'AnotherPage')
+    fallback_class = MagicMock()
+    fallback_page = navigation.action_performed('unknown', fallback=fallback_class)
+    assert navigation.page is fallback_page
+    assert navigation.page_id is None
+    assert fallback_page.wait_for_page_to_load.assert_called_once() is None
+    assert fallback_class.assert_called_once_with(page_instance.driver) is None
+    assert fallback_class.return_value.navigation is navigation
 
 
 def test_get_credentials(navigation):

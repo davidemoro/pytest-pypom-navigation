@@ -204,7 +204,8 @@ def navigation(navigation_class,
                page_mappings,
                credentials_mapping,
                skin,
-               skin_base_url):
+               skin_base_url,
+               variables):
     """ Wraps a page and a page mappings accessible by
         pages.
 
@@ -218,7 +219,8 @@ def navigation(navigation_class,
         page_mappings,
         credentials_mapping,
         skin,
-        skin_base_url)
+        skin_base_url,
+        variables=variables,)
     return nav
 
 

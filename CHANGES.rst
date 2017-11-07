@@ -4,7 +4,8 @@ Changelog
 0.1.2 (unreleased)
 ==================
 
-- navigation supports kwargs (pytest variables available too)
+- navigation initialized with kwargs (including variables
+  coming from pytest variables too)
 
 
 0.1.1 (2017-10-30)

@@ -19,13 +19,15 @@ class Navigation(object):
                  page_mappings,
                  credentials_mapping,
                  skin,
-                 skin_base_url):
+                 skin_base_url,
+                 **kwargs):
         self.setPage(page)
         self.default_page_class = default_page_class
         self.page_mappings = page_mappings
         self.credentials_mapping = credentials_mapping
         self.skin = skin
         self.skin_base_url = skin_base_url
+        self.kwargs = kwargs
 
     def setPage(self, page, page_id=None):
         """ Set wrapping page and update reference links

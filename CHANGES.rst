@@ -4,7 +4,7 @@ Changelog
 0.1.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- navigation supports kwargs (pytest variables available too)
 
 
 0.1.1 (2017-10-30)

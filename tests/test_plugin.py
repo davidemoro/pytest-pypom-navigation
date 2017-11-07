@@ -294,14 +294,15 @@ def test_navigation():
         page_mappings,
         credentials_mapping,
         skin,
-        skin_base_url
+        skin_base_url,
+        variables={},
     ) is navigation_instance
     assert navigation_class.assert_called_once_with(
         page_instance,
         default_page_class,
         page_mappings,
         credentials_mapping,
-        skin, skin_base_url) is None
+        skin, skin_base_url, variables={}) is None
 
 
 def test_test_run_identifier(test_run_identifier, skin):

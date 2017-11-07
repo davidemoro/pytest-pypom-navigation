@@ -3,6 +3,11 @@ from mock import MagicMock
 
 
 @pytest.fixture
+def variables():
+    return {'foo': 'bar'}
+
+
+@pytest.fixture
 def page_instance():
     return MagicMock()
 
@@ -68,7 +73,8 @@ def test_visit_page(navigation, page_instance, default_page_class):
     assert home_page.driver.visit.assert_called_once_with(
         'https://skin1-coolsite.com/home') is None
     assert home_page.wait_for_page_to_load.assert_called_once() is None
-    assert default_page_class.assert_called_once_with(page_instance.driver) is None
+    assert default_page_class.assert_called_once_with(
+        page_instance.driver) is None
     assert default_page_class.return_value.navigation is navigation
 
 
@@ -78,7 +84,8 @@ def test_update_page(navigation, page_instance, default_page_class):
     assert navigation.page is home_page
     assert navigation.page_id == 'HomePage'
     assert home_page.wait_for_page_to_load.assert_called_once() is None
-    assert default_page_class.assert_called_once_with(page_instance.driver) is None
+    assert default_page_class.assert_called_once_with(
+        page_instance.driver) is None
     assert default_page_class.return_value.navigation is navigation
 
 
@@ -89,26 +96,31 @@ def test_action_performed(navigation, page_instance, default_page_class):
     assert navigation.page is home_page
     assert navigation.page_id == 'HomePage'
     assert home_page.wait_for_page_to_load.assert_called_once() is None
-    assert default_page_class.assert_called_once_with(page_instance.driver) is None
+    assert default_page_class.assert_called_once_with(
+         page_instance.driver) is None
     assert default_page_class.return_value.navigation is navigation
 
 
-def test_action_performed_no_action_mapped(navigation, page_instance, default_page_class):
+def test_action_performed_no_action_mapped(navigation, page_instance,
+                                           default_page_class):
     """ Test visit page """
     navigation.setPage(page_instance, 'AnotherPage')
     default_page = navigation.action_performed('unknown')
     assert navigation.page is default_page
     assert navigation.page_id is None
     assert default_page.wait_for_page_to_load.assert_called_once() is None
-    assert default_page_class.assert_called_once_with(page_instance.driver) is None
+    assert default_page_class.assert_called_once_with(
+        page_instance.driver) is None
     assert default_page_class.return_value.navigation is navigation
 
 
-def test_action_performed_fallback(navigation, page_instance, default_page_class):
+def test_action_performed_fallback(navigation, page_instance,
+                                   default_page_class):
     """ Test visit page """
     navigation.setPage(page_instance, 'AnotherPage')
     fallback_class = MagicMock()
-    fallback_page = navigation.action_performed('unknown', fallback=fallback_class)
+    fallback_page = navigation.action_performed('unknown',
+                                                fallback=fallback_class)
     assert navigation.page is fallback_page
     assert navigation.page_id is None
     assert fallback_page.wait_for_page_to_load.assert_called_once() is None
@@ -119,3 +131,8 @@ def test_action_performed_fallback(navigation, page_instance, default_page_class
 def test_get_credentials(navigation):
     """ Test get credentials """
     assert navigation.get_credentials('Administrator') == ('admin', 'pwd')
+
+
+def test_get_kwargs(navigation):
+    """ Test kwargs """
+    assert navigation.kwargs['variables']['foo'] == 'bar'

@@ -26,6 +26,8 @@ created in the ``pypom_navigation`` package:
       skip_by_skin_names;
       test_run_identifier;
       variables;
+      default_timeout;
+      default_timeout -> {base_page};
       base_page -> {page_instance};
       bdd_vars -> {parametrizer};
       browser -> {base_page};

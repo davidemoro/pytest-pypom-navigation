@@ -169,6 +169,7 @@ def default_page_class(skin, page_mappings, default_pages):
 
 @pytest.fixture
 def default_timeout():
+    """ Default page timeout """
     return 10
 
 
@@ -183,9 +184,6 @@ def base_page(skin_base_url, browser, default_page_class, page_mappings, skin,
         page_mappings,
         skin,
         timeout=default_timeout)
-
-    # visit target url
-    page.open()
 
     return page
 

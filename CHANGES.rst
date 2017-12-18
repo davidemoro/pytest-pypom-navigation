@@ -9,6 +9,9 @@ Changelog
 
 - add global timeout for all pages (default 10)
 
+- base_page fixture no longer opens page by default. It's up to you
+  visiting a page now
+
 
 0.1.1 (2017-10-30)
 ==================

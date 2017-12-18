@@ -7,6 +7,8 @@ Changelog
 - navigation initialized with kwargs (including variables
   coming from pytest variables too)
 
+- add global timeout for all pages (default 10)
+
 
 0.1.1 (2017-10-30)
 ==================

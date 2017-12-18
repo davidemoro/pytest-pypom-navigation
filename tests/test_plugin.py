@@ -54,10 +54,7 @@ def test_credentials_mapping(testdir, credentials_file):
         '-v'
     )
 
-    # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines([
-        '*::test_generated_credentials PASSED',
-    ])
+    assert 'test_generated_credentials PASSED' in result.stdout.str()
 
     # make sure that that we get a '0' exit code for the testsuite
     assert result.ret == 0
@@ -84,10 +81,7 @@ def test_skin_base_url(testdir, credentials_file):
         '-v'
     )
 
-    # fnmatch_lines does an assertion internally
-    result.stdout.fnmatch_lines([
-        '*::test_generated_skin_base_url_dummy PASSED',
-    ])
+    assert 'test_generated_skin_base_url_dummy PASSED' in result.stdout.str()
 
     # make sure that that we get a '0' exit code for the testsuite
     assert result.ret == 0
@@ -231,7 +225,7 @@ def test_skip_by_skin_names_import(testdir, credentials_file):
     assert result.ret == 0
 
 
-def test_base_page():
+def test_base_page(default_timeout):
     from mock import patch
     from mock import Mock
     from pypom_navigation.plugin import base_page
@@ -247,13 +241,13 @@ def test_base_page():
         page_mappings = None
         skin = None
         base_page(skin_base_url, browser,
-                  default_page_class, page_mappings, skin)
+                  default_page_class, page_mappings, skin, default_timeout)
         assert page_factory.assert_called_once_with(
             skin_base_url,
             browser,
             default_page_class,
             page_mappings,
-            skin) is None
+            skin, timeout=default_timeout) is None
         assert page_mock.open.called is True
 
 

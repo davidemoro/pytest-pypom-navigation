@@ -168,14 +168,21 @@ def default_page_class(skin, page_mappings, default_pages):
 
 
 @pytest.fixture
-def base_page(skin_base_url, browser, default_page_class, page_mappings, skin):
+def default_timeout():
+    return 10
+
+
+@pytest.fixture
+def base_page(skin_base_url, browser, default_page_class, page_mappings, skin,
+              default_timeout):
     """ Base page instance """
     page = page_factory(
         skin_base_url,
         browser,
         default_page_class,
         page_mappings,
-        skin)
+        skin,
+        timeout=default_timeout)
 
     # visit target url
     page.open()

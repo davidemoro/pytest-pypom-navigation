@@ -248,7 +248,6 @@ def test_base_page(default_timeout):
             default_page_class,
             page_mappings,
             skin, timeout=default_timeout) is None
-        assert page_mock.open.called is True
 
 
 def test_page_instance():

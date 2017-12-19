@@ -1,7 +1,7 @@
 Changelog
 *********
 
-0.1.2 (unreleased)
+1.0.0 (2017-12-19)
 ==================
 
 - navigation initialized with kwargs (including variables

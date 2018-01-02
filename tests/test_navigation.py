@@ -47,7 +47,6 @@ def default_page_class():
 
 def test_navigation_init(
         navigation,
-        page_instance,
         default_page_class,
         page_mappings,
         credentials_mapping,
@@ -55,8 +54,7 @@ def test_navigation_init(
         skin_base_url):
     """ Navigation init """
 
-    assert navigation.page is page_instance
-    assert page_instance.navigation is navigation
+    assert navigation.page is None
     assert navigation.default_page_class is default_page_class
     assert navigation.page_mappings == page_mappings
     assert navigation.credentials_mapping == credentials_mapping

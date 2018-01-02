@@ -33,9 +33,10 @@ class Navigation(object):
         """ Set wrapping page and update reference links
             for page and navigation
         """
-        page.navigation = self
         self.page = page
         self.page_id = page_id
+        if page is not None:
+            page.navigation = self
 
     def visit_page(self, page_id, **kwargs):
         """ Visit page id reference in navigation

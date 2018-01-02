@@ -225,45 +225,6 @@ def test_skip_by_skin_names_import(testdir, credentials_file):
     assert result.ret == 0
 
 
-def test_base_page(default_timeout):
-    from mock import patch
-    from mock import Mock
-    from pypom_navigation.plugin import base_page
-
-    page_mock = Mock()
-
-    with patch('pypom_navigation.plugin.page_factory') as page_factory:
-        page_factory.return_value = page_mock
-
-        skin_base_url = None
-        browser = None
-        default_page_class = None
-        page_mappings = None
-        skin = None
-        base_page(skin_base_url, browser,
-                  default_page_class, page_mappings, skin, default_timeout)
-        assert page_factory.assert_called_once_with(
-            skin_base_url,
-            browser,
-            default_page_class,
-            page_mappings,
-            skin, timeout=default_timeout) is None
-
-
-def test_page_instance():
-    """ page instance fixture customizes the base page (for example)
-        by default maximize windows has called but you can override it
-    """
-    from mock import MagicMock
-    from pypom_navigation.plugin import page_instance
-
-    base_page = MagicMock()
-    assert page_instance(base_page) is base_page
-
-    assert base_page.driver.driver.maximize_window \
-        .assert_called_once_with() is None
-
-
 def test_navigation():
     """ Test navigation  """
     from mock import Mock

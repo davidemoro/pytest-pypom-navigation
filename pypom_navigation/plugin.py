@@ -6,7 +6,6 @@ created in the ``pypom_navigation`` package:
 .. graphviz::
 
    digraph {
-      base_page;
       bdd_vars;
       browser;
       credentials_mapping;
@@ -16,7 +15,6 @@ created in the ``pypom_navigation`` package:
       navigation;
       navigation_class;
       now;
-      page_instance;
       page_mappings,
       parametrizer;
       parametrizer_class;
@@ -27,23 +25,19 @@ created in the ``pypom_navigation`` package:
       test_run_identifier;
       variables;
       default_timeout;
-      default_timeout -> {base_page};
-      base_page -> {page_instance};
       bdd_vars -> {parametrizer};
-      browser -> {base_page};
       credentials_mapping -> {navigation};
-      default_page_class -> {base_page navigation};
+      default_page_class -> {navigation};
       default_pages -> {default_page_class};
       navigation_class -> {navigation};
       now -> {bdd_vars};
-      page_instance -> {navigation};
-      page_mappings -> {default_page_class base_page navigation};
+      page_mappings -> {default_page_class navigation};
       parametrizer_class -> {parametrizer};
       request -> {skip_by_skin_names};
       skin -> {skin_base_url credentials_mapping default_page_class
-               base_page navigation skip_by_skin_names
+               navigation skip_by_skin_names
                test_run_identifier bdd_vars};
-      skin_base_url -> {base_page navigation};
+      skin_base_url -> {navigation};
       test_run_identifier -> {bdd_vars};
       variables -> {skin_base_url credentials_mapping};
    }
@@ -58,7 +52,6 @@ import datetime
 
 from .util import (
     get_page_class,
-    page_factory,
 )
 from .navigation import Navigation
 from .parametrizer import Parametrizer
@@ -176,43 +169,14 @@ def default_timeout():
 
 
 @pytest.fixture
-def base_page(skin_base_url, browser, default_page_class, page_mappings, skin,
-              default_timeout):
-    """ Base page instance """
-    page = page_factory(
-        skin_base_url,
-        browser,
-        default_page_class,
-        page_mappings,
-        skin,
-        timeout=default_timeout)
-
-    return page
-
-
-@pytest.fixture
-def page_instance(base_page):
-    """ Initialize base page.
-        You can override this fixture in order to customize
-        the page initialization (eg: some sites needs auth
-        after, other sites before)
-    """
-
-    # maximize window
-    base_page.driver.driver.maximize_window()
-
-    return base_page
-
-
-@pytest.fixture
 def navigation(navigation_class,
-               page_instance,
                default_page_class,
                page_mappings,
                credentials_mapping,
                skin,
                skin_base_url,
-               variables):
+               variables,
+               default_timeout):
     """ Wraps a page and a page mappings accessible by
         pages.
 
@@ -221,13 +185,14 @@ def navigation(navigation_class,
         change.
     """
     nav = navigation_class(
-        page_instance,
+        None,      # backwards compatibility
         default_page_class,
         page_mappings,
         credentials_mapping,
         skin,
         skin_base_url,
-        variables=variables,)
+        variables=variables,
+        timeout=default_timeout)
     return nav
 
 

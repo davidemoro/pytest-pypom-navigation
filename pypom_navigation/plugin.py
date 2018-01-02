@@ -175,6 +175,7 @@ def navigation(navigation_class,
                credentials_mapping,
                skin,
                skin_base_url,
+               request,
                variables,
                default_timeout):
     """ Wraps a page and a page mappings accessible by
@@ -191,6 +192,7 @@ def navigation(navigation_class,
         credentials_mapping,
         skin,
         skin_base_url,
+        request,
         variables=variables,
         timeout=default_timeout)
     return nav

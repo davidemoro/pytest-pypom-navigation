@@ -234,29 +234,36 @@ def test_navigation():
     navigation_class = Mock()
     navigation_class.return_value = navigation_instance
 
-    page_instance = object()
     default_page_class = object()
     page_mappings = object()
     credentials_mapping = object()
     skin = object()
     skin_base_url = object()
+    request = object()
+    variables = {}
+    default_timeout = 15
 
     assert navigation(
         navigation_class,
-        page_instance,
         default_page_class,
         page_mappings,
         credentials_mapping,
         skin,
         skin_base_url,
-        variables={},
+        request,
+        variables,
+        default_timeout,
     ) is navigation_instance
     assert navigation_class.assert_called_once_with(
-        page_instance,
+        None,
         default_page_class,
         page_mappings,
         credentials_mapping,
-        skin, skin_base_url, variables={}) is None
+        skin,
+        skin_base_url,
+        request,
+        variables=variables,
+        timeout=default_timeout) is None
 
 
 def test_test_run_identifier(test_run_identifier, skin):

@@ -20,6 +20,7 @@ class Navigation(object):
                  credentials_mapping,
                  skin,
                  skin_base_url,
+                 request,
                  **kwargs):
         self.setPage(page)
         self.default_page_class = default_page_class
@@ -27,6 +28,7 @@ class Navigation(object):
         self.credentials_mapping = credentials_mapping
         self.skin = skin
         self.skin_base_url = skin_base_url
+        self.request = request
         self.kwargs = kwargs
 
     def setPage(self, page, page_id=None):
@@ -95,4 +97,12 @@ class Navigation(object):
 
     def _page_instance(self, page_id=None, fallback=None, **kwargs):
         page_class = self.get_page_class(page_id=page_id, fallback=fallback)
-        return page_class(self.page.driver, **kwargs)
+        return page_class(self.driver, **kwargs)
+
+    @property
+    def driver(self):
+        if self.page is not None:
+            value = self.page.driver
+        else:
+            value = self.request.getfixturevalue('browser')
+        return value

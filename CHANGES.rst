@@ -1,7 +1,7 @@
 Changelog
 *********
 
-1.0.1 (unreleased)
+2.0.0 (2018-01-02)
 ==================
 
 - navigation will no more be initialized automatically with an open

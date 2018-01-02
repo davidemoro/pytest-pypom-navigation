@@ -13,6 +13,8 @@ Changelog
 - you can override the default page timeout using a ``pytest-variables``
   configuration named ``default_timeout``
 
+- add new method ``get_page_instance`` on navigation
+
 
 1.0.0 (2017-12-19)
 ==================

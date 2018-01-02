@@ -68,7 +68,8 @@ def test_navigation_init(
     assert navigation.page_id is None
 
 
-def test_visit_page(navigation, default_page_class, browser):
+def test_visit_page(navigation, default_page_class, browser,
+                    default_timeout):
     """ Test visit page """
     home_page = navigation.visit_page('HomePage')
     assert navigation.page is home_page
@@ -77,22 +78,24 @@ def test_visit_page(navigation, default_page_class, browser):
         'https://skin1-coolsite.com/home') is None
     assert home_page.wait_for_page_to_load.assert_called_once() is None
     assert default_page_class.assert_called_once_with(
-        browser) is None
+        browser, timeout=default_timeout) is None
     assert default_page_class.return_value.navigation is navigation
 
 
-def test_update_page(navigation, default_page_class, browser):
+def test_update_page(navigation, default_page_class, browser,
+                     default_timeout):
     """ Test update page """
     home_page = navigation.update_page('HomePage')
     assert navigation.page is home_page
     assert navigation.page_id == 'HomePage'
     assert home_page.wait_for_page_to_load.assert_called_once() is None
     assert default_page_class.assert_called_once_with(
-        browser) is None
+        browser, timeout=default_timeout) is None
     assert default_page_class.return_value.navigation is navigation
 
 
-def test_action_performed(navigation, page, default_page_class, browser):
+def test_action_performed(navigation, page, default_page_class, browser,
+                          default_timeout):
     """ Test visit page """
     navigation.setPage(page, 'AnotherPage')
     home_page = navigation.action_performed('back')
@@ -100,12 +103,13 @@ def test_action_performed(navigation, page, default_page_class, browser):
     assert navigation.page_id == 'HomePage'
     assert home_page.wait_for_page_to_load.assert_called_once() is None
     assert default_page_class.assert_called_once_with(
-         page.driver) is None
+         page.driver, timeout=default_timeout) is None
     assert default_page_class.return_value.navigation is navigation
 
 
 def test_action_performed_no_action_mapped(navigation, page,
-                                           default_page_class):
+                                           default_page_class,
+                                           default_timeout):
     """ Test visit page """
     navigation.setPage(page, 'AnotherPage')
     default_page = navigation.action_performed('unknown')
@@ -113,12 +117,12 @@ def test_action_performed_no_action_mapped(navigation, page,
     assert navigation.page_id is None
     assert default_page.wait_for_page_to_load.assert_called_once() is None
     assert default_page_class.assert_called_once_with(
-        page.driver) is None
+        page.driver, timeout=default_timeout) is None
     assert default_page_class.return_value.navigation is navigation
 
 
 def test_action_performed_fallback(navigation, page,
-                                   default_page_class):
+                                   default_page_class, default_timeout):
     """ Test visit page """
     navigation.setPage(page, 'AnotherPage')
     fallback_class = MagicMock()
@@ -127,7 +131,8 @@ def test_action_performed_fallback(navigation, page,
     assert navigation.page is fallback_page
     assert navigation.page_id is None
     assert fallback_page.wait_for_page_to_load.assert_called_once() is None
-    assert fallback_class.assert_called_once_with(page.driver) is None
+    assert fallback_class.assert_called_once_with(
+        page.driver, timeout=default_timeout) is None
     assert fallback_class.return_value.navigation is navigation
 
 
@@ -136,6 +141,20 @@ def test_get_credentials(navigation):
     assert navigation.get_credentials('Administrator') == ('admin', 'pwd')
 
 
-def test_get_kwargs(navigation):
+def test_get_kwargs(navigation, default_timeout):
     """ Test kwargs """
-    assert navigation.kwargs['variables']['foo'] == 'bar'
+    assert navigation.kwargs['timeout'] == default_timeout
+
+
+def test_merge_kwargs(navigation, default_timeout):
+    """ Test kwargs """
+    assert navigation.kwargs['timeout'] == default_timeout
+    assert 'new' not in navigation.kwargs
+    merged = navigation.merge_kwargs(dict(new=1))
+    assert merged['timeout'] == default_timeout
+    assert merged['new'] == 1
+
+
+def test_variables(navigation):
+    """ Test kwargs """
+    assert navigation.variables['foo'] == 'bar'

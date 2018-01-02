@@ -262,7 +262,7 @@ def test_navigation():
         skin,
         skin_base_url,
         request,
-        variables=variables,
+        variables,
         timeout=default_timeout) is None
 
 

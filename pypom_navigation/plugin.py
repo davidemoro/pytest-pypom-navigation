@@ -193,7 +193,7 @@ def navigation(navigation_class,
         skin,
         skin_base_url,
         request,
-        variables=variables,
+        variables,
         timeout=default_timeout)
     return nav
 

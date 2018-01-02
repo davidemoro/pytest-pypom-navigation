@@ -24,7 +24,7 @@ created in the ``pypom_navigation`` package:
       skip_by_skin_names;
       test_run_identifier;
       variables;
-      default_timeout;
+      default_timeout -> {variables};
       bdd_vars -> {parametrizer};
       credentials_mapping -> {navigation};
       default_page_class -> {navigation};
@@ -163,9 +163,9 @@ def default_page_class(skin, page_mappings, default_pages):
 
 
 @pytest.fixture
-def default_timeout():
+def default_timeout(variables):
     """ Default page timeout """
-    return 10
+    return variables.get('default_timeout', 10)
 
 
 @pytest.fixture

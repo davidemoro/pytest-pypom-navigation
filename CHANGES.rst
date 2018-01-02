@@ -4,11 +4,14 @@ Changelog
 1.0.1 (unreleased)
 ==================
 
-- Navigation will no more be initialized automatically with an open
+- navigation will no more be initialized automatically with an open
   browser by default since pypom_navigation is used by third party
   plugins even for non UI plugins. This way we avoid to open
   a browser if it is not needed and explicitly requested with a
   set page or visit page
+
+- you can override the default page timeout using a ``pytest-variables``
+  configuration named ``default_timeout``
 
 
 1.0.0 (2017-12-19)

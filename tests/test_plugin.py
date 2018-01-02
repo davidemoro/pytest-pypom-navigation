@@ -225,45 +225,6 @@ def test_skip_by_skin_names_import(testdir, credentials_file):
     assert result.ret == 0
 
 
-def test_base_page(default_timeout):
-    from mock import patch
-    from mock import Mock
-    from pypom_navigation.plugin import base_page
-
-    page_mock = Mock()
-
-    with patch('pypom_navigation.plugin.page_factory') as page_factory:
-        page_factory.return_value = page_mock
-
-        skin_base_url = None
-        browser = None
-        default_page_class = None
-        page_mappings = None
-        skin = None
-        base_page(skin_base_url, browser,
-                  default_page_class, page_mappings, skin, default_timeout)
-        assert page_factory.assert_called_once_with(
-            skin_base_url,
-            browser,
-            default_page_class,
-            page_mappings,
-            skin, timeout=default_timeout) is None
-
-
-def test_page_instance():
-    """ page instance fixture customizes the base page (for example)
-        by default maximize windows has called but you can override it
-    """
-    from mock import MagicMock
-    from pypom_navigation.plugin import page_instance
-
-    base_page = MagicMock()
-    assert page_instance(base_page) is base_page
-
-    assert base_page.driver.driver.maximize_window \
-        .assert_called_once_with() is None
-
-
 def test_navigation():
     """ Test navigation  """
     from mock import Mock
@@ -273,29 +234,36 @@ def test_navigation():
     navigation_class = Mock()
     navigation_class.return_value = navigation_instance
 
-    page_instance = object()
     default_page_class = object()
     page_mappings = object()
     credentials_mapping = object()
     skin = object()
     skin_base_url = object()
+    request = object()
+    variables = {}
+    default_timeout = 15
 
     assert navigation(
         navigation_class,
-        page_instance,
         default_page_class,
         page_mappings,
         credentials_mapping,
         skin,
         skin_base_url,
-        variables={},
+        request,
+        variables,
+        default_timeout,
     ) is navigation_instance
     assert navigation_class.assert_called_once_with(
-        page_instance,
+        None,
         default_page_class,
         page_mappings,
         credentials_mapping,
-        skin, skin_base_url, variables={}) is None
+        skin,
+        skin_base_url,
+        request,
+        variables,
+        timeout=default_timeout) is None
 
 
 def test_test_run_identifier(test_run_identifier, skin):

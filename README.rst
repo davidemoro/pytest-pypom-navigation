@@ -33,6 +33,8 @@ It provides the core engine (pytest fixtures) needed by the strong opinionated s
 called `cookiecutter-qa`_ that let you generate a fully working QA testing hello world project based on
 Selenium/Splinter with just one command.
 
+It is also used by the pytest-play_ engine for collecting variables for tests parametrization.
+
 Tests
 ------------
 
@@ -70,3 +72,4 @@ If you encounter any problems, please `file an issue`_ along with a detailed des
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`PyPI`: https://pypi.python.org/pypi
 .. _`cookiecutter-qa`: https://github.com/tierratelematics/cookiecutter-qa
+.. _`pytest-play`: https://github.com/tierratelematics/pytest-play

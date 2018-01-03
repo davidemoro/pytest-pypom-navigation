@@ -34,7 +34,7 @@ docs_require = [
 
 setup(
     name='pytest-pypom-navigation',
-    version='2.0.1.dev0',
+    version='2.0.1',
     author='Davide Moro',
     author_email='davide.moro@gmail.com',
     maintainer='Davide Moro',

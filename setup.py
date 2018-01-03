@@ -34,14 +34,14 @@ docs_require = [
 
 setup(
     name='pytest-pypom-navigation',
-    version='2.0.1.dev0',
+    version='2.0.2.dev0',
     author='Davide Moro',
     author_email='davide.moro@gmail.com',
     maintainer='Davide Moro',
     maintainer_email='davide.moro@gmail.com',
     license='Apache Software License 2.0',
     url='https://github.com/tierratelematics/pytest-pypom-navigation',
-    description='Core engine for tierra_qa package',
+    description='Core engine for cookiecutter-qa and pytest-play packages',
     long_description=open("README.rst").read() + "\n" +
     open("CHANGES.rst").read(),
     packages=find_packages(),

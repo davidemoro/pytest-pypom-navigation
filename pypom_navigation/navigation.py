@@ -109,6 +109,7 @@ class Navigation(object):
 
     def get_page_instance(self, page_id=None, fallback=None, **kwargs):
         """ Get a fresh page instance """
+        kwargs = self.merge_kwargs(kwargs)
         page_class = self.get_page_class(page_id=page_id, fallback=fallback)
         return page_class(self.driver, **kwargs)
 

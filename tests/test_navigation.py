@@ -158,3 +158,42 @@ def test_merge_kwargs(navigation, default_timeout):
 def test_variables(navigation):
     """ Test kwargs """
     assert navigation.variables['foo'] == 'bar'
+
+
+def test_get_page_instance(navigation, default_timeout,
+                           default_page_class):
+    """ Test kwargs """
+    assert navigation.kwargs['timeout'] == default_timeout
+
+    get_page_class = MagicMock(return_value=default_page_class)
+    navigation.get_page_class = get_page_class
+    assert navigation.get_page_class.called is False
+    assert default_page_class.called is False
+    navigation.get_page_instance()
+    assert navigation.get_page_class.called is True
+    assert navigation.get_page_class.called is True
+    assert navigation.get_page_class.assert_called_once_with(
+        fallback=None, page_id=None) is None
+    assert default_page_class.assert_called_once_with(
+        navigation.driver, timeout=default_timeout) is None
+
+
+def test_get_page_instance_kwargs(navigation, default_timeout,
+                                  default_page_class):
+    """ Test kwargs """
+    assert navigation.kwargs['timeout'] == default_timeout
+    assert 'new' not in navigation.kwargs
+
+    get_page_class = MagicMock(return_value=default_page_class)
+    navigation.get_page_class = get_page_class
+    assert navigation.get_page_class.called is False
+    assert default_page_class.called is False
+    navigation.get_page_instance(new=2)
+    assert navigation.get_page_class.called is True
+    assert navigation.get_page_class.called is True
+    assert navigation.get_page_class.assert_called_once_with(
+        fallback=None, page_id=None) is None
+    assert default_page_class.assert_called_once_with(
+        navigation.driver, timeout=default_timeout, new=2) is None
+    assert navigation.kwargs['timeout'] == default_timeout
+    assert 'new' not in navigation.kwargs

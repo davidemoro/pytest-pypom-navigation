@@ -4,7 +4,7 @@ Changelog
 2.0.1 (unreleased)
 ==================
 
-- Nothing changed yet.
+- fix ``get_page_instance`` (missing page kwargs before page construction)
 
 
 2.0.0 (2018-01-02)

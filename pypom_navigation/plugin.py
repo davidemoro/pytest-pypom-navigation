@@ -130,7 +130,10 @@ def page_mappings():
 def skin_base_url(skin, variables):
     """ Returns the skin_base_url associated to the skin.
     """
-    return variables['skins'][skin]['base_url']
+    return variables \
+        .get('skins', {}) \
+        .get(skin, {}) \
+        .get('base_url', '')
 
 
 @pytest.fixture(scope='session')
@@ -142,9 +145,11 @@ def credentials_mapping(skin, variables):
 
         :return: credentials mapping dictionary with all available credentials
         :rtype: dict
-        :raises: KeyError
     """
-    return variables['skins'][skin]['credentials']
+    return variables \
+        .get('skins', {}) \
+        .get(skin, {}) \
+        .get('credentials', {})
 
 
 @pytest.fixture

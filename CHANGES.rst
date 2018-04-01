@@ -4,7 +4,7 @@ Changelog
 2.0.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- make credentials and base url variables optional
 
 
 2.0.1 (2018-01-03)

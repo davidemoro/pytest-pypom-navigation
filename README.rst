@@ -17,7 +17,7 @@ pytest-pypom-navigation
           :target: https://pyup.io/repos/github/davidemoro/pytest-pypom-navigation/
           :alt: Python 3
 
-Core engine for tierra_qa package
+Core engine for cookiecutter QA package
 
 ----
 

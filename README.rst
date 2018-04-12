@@ -3,18 +3,18 @@ pytest-pypom-navigation
 =======================
 
 
-.. image:: https://travis-ci.org/tierratelematics/pytest-pypom-navigation.svg?branch=develop
-    :target: https://travis-ci.org/tierratelematics/pytest-pypom-navigation
+.. image:: https://travis-ci.org/davidemoro/pytest-pypom-navigation.svg?branch=develop
+    :target: https://travis-ci.org/davidemoro/pytest-pypom-navigation
     :alt: See Build Status on Travis CI
 
 .. image:: https://readthedocs.org/projects/pytest-pypom-navigation/badge/?version=latest
           :target: http://pytest-pypom-navigation.readthedocs.io
 
-.. image:: https://codecov.io/gh/tierratelematics/pytest-pypom-navigation/branch/develop/graph/badge.svg
-          :target: https://codecov.io/gh/tierratelematics/pytest-pypom-navigation
+.. image:: https://codecov.io/gh/davidemoro/pytest-pypom-navigation/branch/develop/graph/badge.svg
+          :target: https://codecov.io/gh/davidemoro/pytest-pypom-navigation
 
-.. image:: https://pyup.io/repos/github/tierratelematics/pytest-pypom-navigation/python-3-shield.svg
-          :target: https://pyup.io/repos/github/tierratelematics/pytest-pypom-navigation/
+.. image:: https://pyup.io/repos/github/davidemoro/pytest-pypom-navigation/python-3-shield.svg
+          :target: https://pyup.io/repos/github/davidemoro/pytest-pypom-navigation/
           :alt: Python 3
 
 Core engine for tierra_qa package
@@ -66,10 +66,10 @@ If you encounter any problems, please `file an issue`_ along with a detailed des
 .. _`GNU GPL v3.0`: http://www.gnu.org/licenses/gpl-3.0.txt
 .. _`Apache Software License 2.0`: http://www.apache.org/licenses/LICENSE-2.0
 .. _`cookiecutter-pytest-plugin`: https://github.com/pytest-dev/cookiecutter-pytest-plugin
-.. _`file an issue`: https://github.com/tierratelematics/pytest-pypom-navigation/issues
+.. _`file an issue`: https://github.com/davidemoro/pytest-pypom-navigation/issues
 .. _`pytest`: https://github.com/pytest-dev/pytest
 .. _`tox`: https://tox.readthedocs.io/en/latest/
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`PyPI`: https://pypi.python.org/pypi
-.. _`cookiecutter-qa`: https://github.com/tierratelematics/cookiecutter-qa
-.. _`pytest-play`: https://github.com/tierratelematics/pytest-play
+.. _`cookiecutter-qa`: https://github.com/davidemoro/cookiecutter-qa
+.. _`pytest-play`: https://github.com/pytest-dev/pytest-play

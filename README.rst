@@ -72,4 +72,4 @@ If you encounter any problems, please `file an issue`_ along with a detailed des
 .. _`pip`: https://pypi.python.org/pypi/pip/
 .. _`PyPI`: https://pypi.python.org/pypi
 .. _`cookiecutter-qa`: https://github.com/davidemoro/cookiecutter-qa
-.. _`pytest-play`: https://github.com/pytest-dev/pytest-play
+.. _`pytest-play`: https://github.com/davidemoro/pytest-play

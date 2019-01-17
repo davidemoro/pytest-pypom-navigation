@@ -16,6 +16,7 @@ def read(fname):
 
 install_requires = [
     'pytest>=3.0.7',
+    'parametrizer',
     'pypom_form',
     'pytest-variables[yaml]',
     'zope.dottedname',

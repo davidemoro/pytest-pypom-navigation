@@ -50,11 +50,11 @@ import pytest
 import uuid
 import datetime
 
+from parametrizer import Parametrizer
 from .util import (
     get_page_class,
 )
 from .navigation import Navigation
-from .parametrizer import Parametrizer
 
 
 def pytest_configure(config):
@@ -228,8 +228,14 @@ def skip_by_skin_names(request, skin):
 
         See http://bit.ly/2dYnOSv for further info.
     """
-    if request.node.get_marker('skip_skins'):
-        if skin in request.node.get_marker('skip_skins').args[0]:
+    try:
+        marker = request.node.get_closest_marker('skip_skins')
+    except AttributeError:
+        # old pytest version
+        marker = request.node.get_marker('skip_skins')
+
+    if marker:
+        if skin in marker.args[0]:
             pytest.skip('skipped on this skin: {}'.format(skin))
 
 

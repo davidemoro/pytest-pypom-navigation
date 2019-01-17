@@ -50,11 +50,11 @@ import pytest
 import uuid
 import datetime
 
+from parametrizer import Parametrizer
 from .util import (
     get_page_class,
 )
 from .navigation import Navigation
-from .parametrizer import Parametrizer
 
 
 def pytest_configure(config):
@@ -130,7 +130,10 @@ def page_mappings():
 def skin_base_url(skin, variables):
     """ Returns the skin_base_url associated to the skin.
     """
-    return variables['skins'][skin]['base_url']
+    return variables \
+        .get('skins', {}) \
+        .get(skin, {}) \
+        .get('base_url', '')
 
 
 @pytest.fixture(scope='session')
@@ -142,9 +145,11 @@ def credentials_mapping(skin, variables):
 
         :return: credentials mapping dictionary with all available credentials
         :rtype: dict
-        :raises: KeyError
     """
-    return variables['skins'][skin]['credentials']
+    return variables \
+        .get('skins', {}) \
+        .get(skin, {}) \
+        .get('credentials', {})
 
 
 @pytest.fixture
@@ -223,8 +228,14 @@ def skip_by_skin_names(request, skin):
 
         See http://bit.ly/2dYnOSv for further info.
     """
-    if request.node.get_marker('skip_skins'):
-        if skin in request.node.get_marker('skip_skins').args[0]:
+    try:
+        marker = request.node.get_closest_marker('skip_skins')
+    except AttributeError:
+        # old pytest version
+        marker = request.node.get_marker('skip_skins')
+
+    if marker:
+        if skin in marker.args[0]:
             pytest.skip('skipped on this skin: {}'.format(skin))
 
 

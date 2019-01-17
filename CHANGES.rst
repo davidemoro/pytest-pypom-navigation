@@ -1,10 +1,18 @@
 Changelog
 *********
 
-2.0.2 (unreleased)
+2.0.3 (unreleased)
 ==================
 
-- Nothing changed yet.
+- remove pytest 4.0 deprecation ``get_marker`` (still compatible with old versions)
+
+- removed internal component parametrizer, use external ``parametrizer.Parametrizer`` now
+
+
+2.0.2 (2018-04-01)
+==================
+
+- make credentials and base url variables optional
 
 
 2.0.1 (2018-01-03)

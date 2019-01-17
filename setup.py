@@ -16,6 +16,7 @@ def read(fname):
 
 install_requires = [
     'pytest>=3.0.7',
+    'parametrizer',
     'pypom_form',
     'pytest-variables[yaml]',
     'zope.dottedname',
@@ -34,13 +35,13 @@ docs_require = [
 
 setup(
     name='pytest-pypom-navigation',
-    version='2.0.2.dev0',
+    version='2.0.3.dev0',
     author='Davide Moro',
     author_email='davide.moro@gmail.com',
     maintainer='Davide Moro',
     maintainer_email='davide.moro@gmail.com',
     license='Apache Software License 2.0',
-    url='https://github.com/tierratelematics/pytest-pypom-navigation',
+    url='https://github.com/davidemoro/pytest-pypom-navigation',
     description='Core engine for cookiecutter-qa and pytest-play packages',
     long_description=open("README.rst").read() + "\n" +
     open("CHANGES.rst").read(),

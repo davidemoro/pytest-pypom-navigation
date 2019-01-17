@@ -225,47 +225,6 @@ def test_skip_by_skin_names_import(testdir, credentials_file):
     assert result.ret == 0
 
 
-def test_navigation():
-    """ Test navigation  """
-    from mock import Mock
-    from pypom_navigation.plugin import navigation
-
-    navigation_instance = Mock()
-    navigation_class = Mock()
-    navigation_class.return_value = navigation_instance
-
-    default_page_class = object()
-    page_mappings = object()
-    credentials_mapping = object()
-    skin = object()
-    skin_base_url = object()
-    request = object()
-    variables = {}
-    default_timeout = 15
-
-    assert navigation(
-        navigation_class,
-        default_page_class,
-        page_mappings,
-        credentials_mapping,
-        skin,
-        skin_base_url,
-        request,
-        variables,
-        default_timeout,
-    ) is navigation_instance
-    assert navigation_class.assert_called_once_with(
-        None,
-        default_page_class,
-        page_mappings,
-        credentials_mapping,
-        skin,
-        skin_base_url,
-        request,
-        variables,
-        timeout=default_timeout) is None
-
-
 def test_test_run_identifier(test_run_identifier, skin):
     """ Test run identifier """
     assert test_run_identifier.startswith('QA-')
@@ -286,7 +245,7 @@ def test_bdd_vars(bdd_vars, skin, now, test_run_identifier):
 
 def test_parametrizer_class(parametrizer_class):
     """ Test parametrizer class """
-    from pypom_navigation.parametrizer import Parametrizer
+    from parametrizer import Parametrizer
     assert parametrizer_class is Parametrizer
 
 

@@ -1,7 +1,7 @@
 Changelog
 *********
 
-2.0.3 (unreleased)
+2.0.3 (2019-01-17)
 ==================
 
 - remove pytest 4.0 deprecation ``get_marker`` (still compatible with old versions)

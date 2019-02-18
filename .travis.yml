@@ -26,4 +26,4 @@ deploy:
     tags: true
     branch: master
     distributions: sdist bdist_wheel
-    repo: tierratelematics/pytest-pypom-navigation
+    repo: davidemoro/pytest-pypom-navigation

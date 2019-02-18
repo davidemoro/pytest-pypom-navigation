@@ -4,7 +4,7 @@ Changelog
 2.0.4 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Updated travis deploy password
 
 
 2.0.3 (2019-01-17)
